@@ -4,6 +4,16 @@ A [Foxglove Studio](https://foxglove.dev/) extension panel that renders OGC 3D T
 
 Built with [Three.js](https://threejs.org/) and [3d-tiles-renderer](https://github.com/NASA-AMMOS/3DTilesRendererJS). No Cesium dependency.
 
+
+<br>
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/c44bc4c6-31f9-4d44-99ea-dc3fb3ccadb1" width="100%">
+  <br><br>
+  <em>Foxglove 3D Tiles</em>
+</div>
+<br>
+
+
 ## Features
 
 - **3D Tiles rendering** -- Google Photorealistic 3D Tiles or custom local tilesets
