@@ -107,4 +107,4 @@ www/js/*
 .DS_Store
 
 # Packed
-.foxe
+*.foxe
