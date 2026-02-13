@@ -105,3 +105,6 @@ www/js/*
 
 # MacOS
 .DS_Store
+
+# Packed
+.foxe

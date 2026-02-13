@@ -72,45 +72,13 @@ Add layers from the Settings panel to visualize additional topics:
 | Odometry | `nav_msgs/Odometry` | Arrow at each pose |
 | NavSat | `sensor_msgs/NavSatFix` | Dot buffer on the globe |
 
-## Project Structure
-
-```
-src/
-  index.ts                    -- Extension entry point
-  3DTilesPanel.tsx             -- Main React panel component
-  ThreeDSceneManager.ts        -- Three.js scene, tiles, URDF, markers
-  types.ts                     -- TypeScript type definitions
-  constants.ts                 -- Default config and constants
-  systems/
-    TFSystem.ts                -- TF transform tree
-    GlobeTransformer.ts        -- ECEF/ENU coordinate transforms
-  layers/
-    MapLayer.ts                -- Layer interface
-    PathLayer.ts               -- Path visualization
-    OdometryLayer.ts           -- Odometry arrow visualization
-    NavSatLayer.ts             -- NavSat dot visualization
-    index.ts                   -- Layer exports and factory
-  components/
-    SettingsPanel.tsx           -- Settings UI
-```
-
 ## Development
 
 ```bash
 npm run build        # Development build
-npm run build:prod   # Production build
-npm run watch        # Watch mode
 npm run local-install # Build + install into Foxglove Studio
 npm run package      # Package as .foxe for distribution
 ```
-
-## Technical Details
-
-- **Three.js** for WebGL rendering
-- **3d-tiles-renderer** (NASA JPL) for OGC 3D Tiles loading and globe controls
-- **urdf-loader** for URDF robot model parsing and rendering
-- Fully bundled into a single `extension.js` (~815 KB minified)
-- No external CDN, workers, or WASM -- fully Foxglove CSP-compliant
 
 ## ROS Topics
 
