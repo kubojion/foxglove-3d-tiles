@@ -2,7 +2,7 @@
 
 A [Foxglove Studio](https://foxglove.dev/) extension panel that renders OGC 3D Tiles (including Google Photorealistic 3D Tiles) with real-time ROS 2 integration for GPS tracking, URDF robot visualization, and TF frame display.
 
-Built with [Three.js](https://threejs.org/) and [3d-tiles-renderer](https://github.com/NASA-AMMOS/3DTilesRendererJS). No Cesium dependency.
+<!-- Built with [Three.js](https://threejs.org/) and [3d-tiles-renderer](https://github.com/NASA-AMMOS/3DTilesRendererJS). No Cesium dependency. -->
 
 
 <br>
@@ -17,15 +17,11 @@ Built with [Three.js](https://threejs.org/) and [3d-tiles-renderer](https://gith
 ## Features
 
 - **3D Tiles rendering** -- Google Photorealistic 3D Tiles or custom local tilesets
-- **GPS tracking** -- real-time robot position from `sensor_msgs/NavSatFix`
-- **URDF rendering** -- full robot model from `std_msgs/String` with joint state updates
+- **GPS tracking** -- real-time position from `sensor_msgs/NavSatFix`
+- **URDF rendering** -- full model from `std_msgs/String` with joint state updates
 - **TF frame visualization** -- render the TF tree as 3D axes on the map
 - **Visualization layers** -- configurable Path, Odometry, and NavSat layers from arbitrary topics
-- **Camera modes** -- Free, Follow
-- **Robot marker and trail** -- red sphere marker with breadcrumb trail
 - **Local tileset support** -- load folder-based 3D Tiles with configurable georeference (lat/lon/alt/heading/scale)
-- **Snap-to-robot / snap-to-fixed-frame** -- quickly align custom tile origin to current robot or fixed frame position
-- **Settings persistence** -- all configuration saved across sessions
 
 ## Prerequisites
 
