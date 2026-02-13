@@ -1,0 +1,29 @@
+{
+  "extends": "create-foxglove-extension/tsconfig/tsconfig.json",
+
+  "include": ["./src/**/*"],
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "lib": ["dom"],
+
+    // Override moduleResolution to support package.json "exports" field
+    // Required by 3d-tiles-renderer which uses subpath exports
+    "module": "ES2020",
+    "moduleResolution": "bundler",
+
+    // These two settings prevent typescript from emitting .d.ts files we don't need in
+    // the compiled extension.
+    "composite": false,
+    "declaration": false,
+
+    // Additional TypeScript error reporting checks are enabled by default to improve code quality.
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
