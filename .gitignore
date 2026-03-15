@@ -103,8 +103,8 @@ dist
 # Build output
 www/js/*
 
+# Foxglove extension package
+*.foxe
+
 # MacOS
 .DS_Store
-
-# Packed
-*.foxe

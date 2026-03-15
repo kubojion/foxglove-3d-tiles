@@ -1,10 +1,10 @@
 {
   "name": "foxglove-3d-tiles",
-  "displayName": "Foxglove 3D Tiles",
-  "description": "Photorealistic 3D map visualization using 3D Tiles with URDF robot rendering and GPS tracking.",
+  "displayName": "3D Tiles",
+  "description": "Photorealistic 3D map visualization using Google/custom 3D Tiles with URDF robot rendering, TF visualization, GPS tracking, and overlay layers for ROS 2.",
   "publisher": "kubojion",
-  "homepage": "",
-  "version": "1.0.0",
+  "homepage": "https://github.com/kubojion/foxglove-3d-tiles",
+  "version": "2.0.0",
   "license": "MIT",
   "main": "./dist/extension.js",
   "keywords": [
@@ -33,29 +33,24 @@
   "devDependencies": {
     "@foxglove/eslint-plugin": "2.1.0",
     "@foxglove/extension": "2.45.0",
-    "@types/google.maps": "^3.58.1",
     "@types/react": "18.3.28",
     "@types/react-dom": "18.3.7",
     "@types/three": "^0.182.0",
     "create-foxglove-extension": "1.1.2",
     "css-loader": "^7.1.3",
     "eslint": "9.39.2",
-    "file-loader": "^6.2.0",
-    "html-webpack-plugin": "^5.6.6",
-    "path-browserify": "^1.0.1",
     "prettier": "3.8.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.4",
     "typescript": "5.9.3",
-    "url-loader": "^4.1.1",
     "webpack": "^5.105.1",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.3"
   },
   "dependencies": {
-    "3d-tiles-renderer": "^0.4.21",
+    "3d-tiles-renderer": "^0.4.22",
     "three": "^0.182.0",
     "urdf-loader": "^0.12.6"
   }

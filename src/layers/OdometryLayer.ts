@@ -5,6 +5,7 @@ import { GlobeTransformer } from "../systems/GlobeTransformer";
 import { MapLayer } from "./MapLayer";
 
 // ==================== ODOMETRY LAYER ====================
+// Uses transformToLocal() for local-ENU coords → full Float32 precision.
 
 export class OdometryLayer implements MapLayer {
   readonly id: string;
@@ -19,8 +20,6 @@ export class OdometryLayer implements MapLayer {
     orientation: { x: number; y: number; z: number; w: number };
   } | null = null;
   private cachedFrameId = "";
-
-  // Dirty flag: only rebuild when new odometry data arrives
   private dirty = false;
 
   constructor(config: LayerConfig) {
@@ -61,8 +60,8 @@ export class OdometryLayer implements MapLayer {
       this.cachedPose.position.y,
       this.cachedPose.position.z,
     );
-    const globePos = transformer.transformToGlobe(pos, frameId);
-    if (!globePos) {
+    const localPos = transformer.transformToLocal(pos, frameId);
+    if (!localPos) {
       if (this.arrowGroup) this.arrowGroup.visible = false;
       return;
     }
@@ -73,16 +72,14 @@ export class OdometryLayer implements MapLayer {
       this.cachedPose.orientation.z,
       this.cachedPose.orientation.w,
     );
-    const globeQuat = transformer.transformOrientationToGlobe(inputQuat, frameId);
+    const localQuat = transformer.transformOrientationToLocal(inputQuat, frameId);
 
-    // Remove old arrow
     this.disposeArrow();
 
-    // Build arrow from shaft (Line) + cone (Mesh)
     const dir = new THREE.Vector3(1, 0, 0);
-    if (globeQuat) dir.applyQuaternion(globeQuat);
+    if (localQuat) dir.applyQuaternion(localQuat);
 
-    const arrow = new THREE.ArrowHelper(dir, globePos, 2.0, new THREE.Color(this.color).getHex(), 0.6, 0.3);
+    const arrow = new THREE.ArrowHelper(dir, localPos, 2.0, new THREE.Color(this.color).getHex(), 0.6, 0.3);
     arrow.renderOrder = 900;
     arrow.traverse((child: THREE.Object3D) => {
       if ((child as any).material) {

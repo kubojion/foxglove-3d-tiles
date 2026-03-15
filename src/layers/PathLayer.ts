@@ -5,6 +5,9 @@ import { GlobeTransformer } from "../systems/GlobeTransformer";
 import { MapLayer } from "./MapLayer";
 
 // ==================== PATH LAYER ====================
+// Uses transformToLocal() for local-ENU coords → full Float32 precision.
+// Path in "map" frame with fixedFrame="map" → vertices are the raw map-frame
+// XYZ values (small numbers), so straight lines stay perfectly straight.
 
 export class PathLayer implements MapLayer {
   readonly id: string;
@@ -16,7 +19,6 @@ export class PathLayer implements MapLayer {
   private line: THREE.Line | null = null;
   private cachedPoses: Array<{ x: number; y: number; z: number }> = [];
   private cachedFrameId = "";
-  // Dirty flag: only rebuild geometry when new path data arrives
   private dirty = false;
 
   constructor(config: LayerConfig) {
@@ -37,14 +39,12 @@ export class PathLayer implements MapLayer {
         const p = ps.pose?.position ?? ps.position ?? { x: 0, y: 0, z: 0 };
         return { x: p.x, y: p.y, z: p.z };
       });
-      this.dirty = true; // Mark for rebuild
+      this.dirty = true;
     }
   }
 
   updateVisualization(transformer: GlobeTransformer): void {
-    // Always re-render if we have poses — the transformer state (TF, anchor)
-    // may have changed even without new path data. Path data is typically small,
-    // so the overhead is negligible.
+    if (!this.dirty) return;
     this.dirty = false;
 
     if (this.cachedPoses.length === 0) return;
@@ -52,15 +52,14 @@ export class PathLayer implements MapLayer {
     const frameId = this.cachedFrameId || transformer.fixedFrame;
     const points: THREE.Vector3[] = [];
     for (const p of this.cachedPoses) {
-      const globe = transformer.transformToGlobe(
+      const local = transformer.transformToLocal(
         new THREE.Vector3(p.x, p.y, p.z + 0.2), frameId,
       );
-      if (globe) points.push(globe);
+      if (local) points.push(local);
     }
 
     if (points.length < 2) return;
 
-    // Reuse existing line if possible, just update geometry
     if (this.line) {
       this.line.geometry.dispose();
       this.line.geometry = new THREE.BufferGeometry().setFromPoints(points);
