@@ -23,8 +23,6 @@ module.exports = (env, argv) => {
 
     // Externals - provided by Foxglove at runtime
     externals: {
-      react: "commonjs react",
-      "react-dom": "commonjs react-dom",
       "@foxglove/extension": "commonjs @foxglove/extension",
     },
 
